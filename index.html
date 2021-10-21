@@ -27,7 +27,7 @@
     }).addTo(map);
 
   // load GeoJSON from an external file
-  $.getJSON("./sidewalkcl-gj.geojson",function(data){
+  $.getJSON("sidewalkcl-gj.geojson",function(data){
     // add GeoJSON layer to the map once the file is loaded
     L.geoJson(data).addTo(map);
   });
