@@ -4,7 +4,6 @@
   <title>9A Leaflet map!</title>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <style>
       body {
       margin: 0;
@@ -20,33 +19,35 @@
 </head>
 
 <body>
-
   <div id="map"></div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script>
- var sidewalk = $.ajax({
-          url:"./plugins/sidewalkcl-gj.geojson",
-          dataType: "json",
-          success: console.log("Sidewalk data successfully loaded."),
-          error: function (xhr) {
-            alert(xhr.statusText)
-          }
-        })
+      var sidewalk = $.ajax({
+        url:"./plugins/sidewalkcl-gj.geojson",
+        dataType: "json",
+        success: console.log("Sidewalk data successfully loaded!"),
+        error: function (xhr) {
+          alert(xhr.statusText)
+        }
+    })
   // initialize the map
           // Specify that this code should run once the county data request is complete
-$.when(sidewalk).done(function() {
-  var map = L.map('map').setView([34.27, -119.22], 13);
+  $.when(sidewalk).done(function() {
+    var map = L.map('map')
+      .setView([34.27, -119.22], 7);
 
   // load a tile layer
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
+  var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
       attribution: 'Tiles by OpenStreetMap, Data by CoV Transportation</a>',
-      maxZoom: 17,
-      minZoom: 9
+      subdomains: 'abcd',
+      manZoom: 19
     }).addTo(map);
       // Add requested external GeoJSON to map
-     var sidewalkcl = L.geoJSON(sidewalk.responseJSON).addTo(map);
+      var sidewalkcl = L.geoJSON(sidewalk.responseJSON).addTo(map);
     });
   </script>
 </body>
+
 </html>
