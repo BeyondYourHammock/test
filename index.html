@@ -12,10 +12,10 @@
   <div id="map"></div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script>
- var counties = $.ajax({
+ var sidewalk = $.ajax({
           url:"./plugins/sidewalkcl-gj.geojson",
           dataType: "json",
-          success: console.log("County data successfully loaded."),
+          success: console.log("Sidewalk data successfully loaded."),
           error: function (xhr) {
             alert(xhr.statusText)
           }
