@@ -1,20 +1,23 @@
+<!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
-  <title>9A Leaflet map!</title>
+  <title>10A Leaflet map!</title>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
   <style>
       body {
-      margin: 0;
-      padding: 0;
-        }
-        #map {
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
       position: absolute;
       top: 0;
       bottom: 0;
       width: 100%;
-        }
+     }
   </style>
 </head>
 
@@ -24,7 +27,7 @@
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script>
       var sidewalk = $.ajax({
-        url:"./plugins/sidewalkcl-gj.geojson",
+        url: "./plugins/sidewalkcl-gj.geojson",
         dataType: "json",
         success: console.log("Sidewalk data successfully loaded!"),
         error: function (xhr) {
@@ -36,10 +39,9 @@
   $.when(sidewalk).done(function() {
     var map = L.map('map')
       .setView([34.27, -119.22], 7);
-
   // load a tile layer
   var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
       attribution: 'Tiles by OpenStreetMap, Data by CoV Transportation</a>',
       subdomains: 'abcd',
       manZoom: 19
