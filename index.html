@@ -32,8 +32,8 @@ $.when(sidewalk).done(function() {
       maxZoom: 17,
       minZoom: 9
     }).addTo(map);
-
+      // Add requested external GeoJSON to map
+     var sidewalkcl-gj = L.geoJSON(sidewalk.responseJSON).addTo(map);
   </script>
 </body>
 </html>
-	
