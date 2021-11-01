@@ -21,6 +21,8 @@
           }
         })
   // initialize the map
+          // Specify that this code should run once the county data request is complete
+$.when(sidewalk).done(function() {
   var map = L.map('map').setView([34.27, -119.22], 13);
 
   // load a tile layer
