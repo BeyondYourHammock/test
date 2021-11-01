@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>A Leaflet map4!</title>
+  <title>A Leaflet map5!</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <style>
@@ -13,7 +13,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script>
  var counties = $.ajax({
-          url:"/plugins/sidewalkcl-gj.geojson",
+          url:"./plugins/sidewalkcl-gj.geojson",
           dataType: "json",
           success: console.log("County data successfully loaded."),
           error: function (xhr) {
