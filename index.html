@@ -37,7 +37,7 @@
   
   
   function buildSWMap2(unit) {
-   let iMapData = new L.GeoJSON.AJAX("./plugins/sidewalkcl-gj.geojson");
+   let iMapData = new L.GeoJSON.AJAX("./plugins/"+ unit +".geojson");
    iMapData.on('data:loaded', function() { 
       iMapData.addTo(map);   
       map.fitBounds(iMapData.getBounds()); 
@@ -47,7 +47,7 @@
   // WHEN Document is  Ready  --> Create Map 
   $(document).ready(function(){  
     addTileLayer();
-    buildSWMap2('Sidewalk');
+    buildSWMap2('sidewalkcl-gj');
   });
   </script>
   </html>
