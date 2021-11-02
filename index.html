@@ -2,50 +2,52 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <title>A simple map</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
-    <div id="map"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-    <script>
-        var sidewalk = $.ajax({
-            url: "./plugins/sidewalkcl-gj.geojson",
-            dataType: "json",
-            success: console.log("Sidewalk data successfully loaded."),
-            error: function(xhr) {
-                alert(xhr.statusText)
-            }
-        })
-        $.when(sidewalk).done(function() {
-            var map = L.map('map')
-                .setView([34.273050, -119.246762], 7);
 
-            var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-                subdomains: 'abcd',
-                maxZoom: 19
-            }).addTo(map);
-            // Add requested external GeoJSON to map
-            var Sidewalkcl = new L.geoJSON.AJAX(["sidewalkcl-gj.geojson"]).addTo(map);
-        });
-    </script>
+<body>
+  <div class="mapArea" id="map" style="height: 500px;"> </div>
 </body>
 
-</html>
+<script>
+
+  // Initialize LEAFLET MAP
+  var map= L.map('map'); 
+  // Basetileyyer
+  function addTileLayer() {
+      tilelayer =   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd' });
+    tilelayer.addTo(map); 
+  }
+  
+  function buildSWMap(data) {
+    console.log(data);
+    let iMap = L.geoJson(data);
+    iMap.addTo(map);
+    map.fitBounds(iMap.getBounds());
+  }
+  
+  
+  function buildSWMap2(unit) {
+   let iMapData = new L.GeoJSON.AJAX("./plugins/sidewalkcl-gj.geojson");
+   iMapData.on('data:loaded', function() { 
+      iMapData.addTo(map);   
+      map.fitBounds(iMapData.getBounds()); 
+  })
+  }
+  
+  // WHEN Document is  Ready  --> Create Map 
+  $(document).ready(function(){  
+    addTileLayer();
+    buildSWMap2('Sidewalk');
+  });
+  </script>
+  </html>
