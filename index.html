@@ -43,7 +43,7 @@
                 maxZoom: 19
             }).addTo(map);
             // Add requested external GeoJSON to map
-            var Sidewalkcl = L.geoJSON(sidewalk.responseJSON).addTo(map);
+            var Sidewalkcl = new L.geoJSON.AJAX(["sidewalkcl-gj.geojson"],{onEachFeature:popUp}).addTo(map);
         });
     </script>
 </body>
